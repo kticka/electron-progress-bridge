@@ -24,6 +24,7 @@ module.exports = class Task {
     }, options)
 
     const task = new Task(options)
+
     return new Promise((resolve) => {
       resolve(options?.serialize ? task.serialize() : task)
       if (cb) {
@@ -45,8 +46,8 @@ module.exports = class Task {
     this.label    = ''
     this.status   = ''
     this.progress = 0
-    this.error    = null
     this.data     = {}
+    this.error    = null
   }
 
   update(data) {
@@ -92,7 +93,7 @@ module.exports = class Task {
     })
   }
 
-  tick() {
+  emit() {
     this._sender.send('epb:tick', this.serialize())
   }
 

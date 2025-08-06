@@ -17,7 +17,7 @@ describe('Renderer Task', () => {
 
   it('Should trigger "completed" callback when status is completed', async () => {
     let triggered = false
-    task.completed(() => {
+    task.on('completed', () => {
       triggered = true
     })
 
@@ -31,7 +31,7 @@ describe('Renderer Task', () => {
   it('Should trigger "catch" callback when status is error', async () => {
     let triggered = false
 
-    task.catch(() => {
+    task.on('error', () => {
       triggered = true
     })
 
@@ -45,7 +45,7 @@ describe('Renderer Task', () => {
   it('Should trigger "timeout" callback when status is timeout', async () => {
     let triggered = false
 
-    task.timeout(() => {
+    task.on('timeout', () => {
       triggered = true
     })
 
@@ -59,7 +59,7 @@ describe('Renderer Task', () => {
   it('Should trigger "tick" callback on any other status', async () => {
     let triggered = false
 
-    task.tick(() => {
+    task.on('tick', () => {
       triggered = true
     })
 

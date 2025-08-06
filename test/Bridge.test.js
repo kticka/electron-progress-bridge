@@ -45,7 +45,7 @@ describe('Bridge', () => {
 
   it('MTask.tick() should trigger RTask.tick()', async () => {
     let received
-    rTask.tick(() => {
+    rTask.on('tick', () => {
       received = true
     })
 
@@ -58,7 +58,7 @@ describe('Bridge', () => {
   it('MTask.complete() should trigger RTask.complete()', async () => {
     let received
 
-    rTask.completed(() => {
+    rTask.on('completed', () => {
       received = true
     })
 
@@ -70,7 +70,7 @@ describe('Bridge', () => {
   it('MTask.throw() should trigger RTask.catch()', async () => {
     let received
 
-    rTask.catch(() => {
+    rTask.on('error', () => {
       received = true
     })
 

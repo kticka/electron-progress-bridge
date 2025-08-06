@@ -27,22 +27,8 @@ export default class Task {
     this.update(data)
   }
 
-  tick(cb) {
-    this._emitter.on('tick', cb)
-    return this
-  }
-
-  completed(cb) {
-    this._emitter.on('completed', cb)
-  }
-
-  catch(cb) {
-    this._emitter.on('error', cb)
-    return this
-  }
-
-  timeout(cb) {
-    this._emitter.on('timeout', cb)
+  on(event, cb) {
+    this._emitter.on(event, cb)
     return this
   }
 
@@ -63,7 +49,7 @@ export default class Task {
     this.update(data)
     this._expiresAt = Date.now() + (this._timeout * 1000)
     const event     = ['completed', 'error', 'timeout'].includes(this.status) ? this.status : 'tick'
-    this._emitter.emit(event, this.serialize())
+    this.emit(event, this.serialize())
     return this
   }
 
