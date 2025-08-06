@@ -43,14 +43,14 @@ describe('Bridge', () => {
     expect(rTask._id).toBe(mTask._id)
   })
 
-  it('MTask.tick() should trigger RTask.tick()', async () => {
+  it('MTask.emit() should trigger RTask.emit()', async () => {
     let received
     rTask.on('tick', () => {
       received = true
     })
 
     expect(received).toBeUndefined()
-    mTask.tick()
+    mTask.emit()
 
     expect(received).toBe(true)
   })
@@ -62,7 +62,7 @@ describe('Bridge', () => {
       received = true
     })
 
-    mTask.complete().tick()
+    mTask.complete().emit()
     expect(rTask.status).toBe('completed')
     expect(rTask.progress).toBe(100)
   })
@@ -74,7 +74,7 @@ describe('Bridge', () => {
       received = true
     })
 
-    mTask.throw(new Error('test')).tick()
+    mTask.throw(new Error('test')).emit()
 
     expect(received).toBe(true)
     expect(rTask.status).toBe('error')

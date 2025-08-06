@@ -25,7 +25,7 @@ describe('Renderer Task', () => {
   it('Task._sender.send should be triggered when provided by options', async () => {
     const task = await Task.invoke(null, {event})
     expect(task._sender).toBeDefined()
-    task.tick()
+    task.emit()
     expect(event.sender.send).toHaveBeenCalledTimes(1)
   })
 
@@ -33,7 +33,7 @@ describe('Renderer Task', () => {
     Task.setup(event.sender)
     const task = await Task.invoke(null)
     expect(task._sender).toBeDefined()
-    task.tick()
+    task.emit()
     expect(event.sender.send).toHaveBeenCalledTimes(1)
   })
 
